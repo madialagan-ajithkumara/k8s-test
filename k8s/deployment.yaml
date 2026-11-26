@@ -1,0 +1,24 @@
+# The web Deployment. Finish the TODOs (see README.md), then add service.yaml, ingress.yaml and hpa.yaml.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  labels:
+    app: web
+spec:
+  replicas: 1 # TODO: run 2 copies so one can fail without downtime
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: web
+          image: nginx # TODO: pin a version tag, e.g. nginx:1.27-alpine
+          ports:
+            - containerPort: 80
+          # TODO: resources: requests and limits for cpu and memory
+          # TODO: readinessProbe and livenessProbe: httpGet path / on port 80
